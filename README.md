@@ -1,38 +1,40 @@
 # Generative AI Document Q&A
 
-An AI-powered Retrieval-Augmented Generation (RAG) system for intelligent question answering over PDF documents.
+An AI-powered Retrieval-Augmented Generation (RAG) system for question answering over PDF documents using semantic search, Chroma vector storage, Hugging Face embeddings, and Ollama.
 
-## 📌 Overview
+## Overview
 
-This project allows users to ask questions about the content of a PDF document and receive context-aware answers. Instead of relying only on the language model's existing knowledge, the system retrieves relevant information from the uploaded document and uses that context to generate the response.
+This project allows users to ask questions about the content of a PDF document and receive context-aware answers.
 
-## 🔄 How It Works
+The system loads the PDF, splits its content into smaller text chunks, generates semantic embeddings, and stores them in a Chroma vector database. When a user asks a question, the system retrieves the most relevant document sections and provides them as context to a locally hosted Llama 3.2 model through Ollama.
 
-The application follows a simple RAG pipeline:
+## How It Works
 
-PDF Document  
-↓  
-Document Loading  
-↓  
-Text Chunking  
-↓  
-Semantic Embeddings  
-↓  
-Chroma Vector Database  
-↓  
-Similarity Search  
-↓  
-Relevant Context  
-↓  
-Local LLM with Ollama  
-↓  
+The application follows a Retrieval-Augmented Generation workflow:
+
+PDF Document
+↓
+Document Loading
+↓
+Text Chunking
+↓
+Semantic Embeddings
+↓
+Chroma Vector Database
+↓
+Similarity Search
+↓
+Relevant Context
+↓
+Llama 3.2 via Ollama
+↓
 Generated Answer
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 - Python
 - LangChain
-- PyPDFLoader
+- PyPDF
 - RecursiveCharacterTextSplitter
 - Hugging Face Embeddings
 - Chroma
@@ -40,29 +42,36 @@ Generated Answer
 - Llama 3.2
 - all-MiniLM-L6-v2
 
-## ✨ Key Features
+## Key Features
 
-- Ask questions about PDF documents
-- Split documents into searchable text chunks
-- Generate semantic embeddings for document content
-- Retrieve relevant document sections using similarity search
-- Generate answers using a locally hosted LLM
-- Keep document information as the context for answering questions
+- Question answering over PDF documents
+- PDF document loading and text processing
+- Text chunking with overlapping chunks
+- Semantic embeddings using Hugging Face
+- Vector storage and similarity search using Chroma
+- Locally hosted LLM inference using Ollama
+- Context-based answer generation
 
-## 🚀 Project Workflow
+## Project Structure
 
-1. Load the PDF document.
-2. Split the document into smaller overlapping chunks.
-3. Generate embeddings for the document chunks.
-4. Store the embeddings in Chroma.
-5. Search for chunks relevant to the user's question.
-6. Pass the retrieved context to the local LLM.
-7. Generate a context-aware answer.
-
-## 📂 Project Structure
-
-```text
 generative-ai-document-qa/
 │
+├── company.pdf
 ├── document_qa.ipynb
-└── README.md
+├── README.md
+└── requirements.txt
+
+## Sample Document
+
+The repository includes `company.pdf`, a sample employee-policy document used to demonstrate the document question-answering workflow.
+
+Example questions include:
+
+- What are the standard working hours?
+- How many sick leave days are available?
+- How many casual leave days are provided?
+- Is work from home allowed?
+
+## Purpose
+
+This project demonstrates the core concepts of Retrieval-Augmented Generation, including document processing, text chunking, semantic embeddings, vector similarity search, context retrieval, and locally hosted LLM-based response generation.
